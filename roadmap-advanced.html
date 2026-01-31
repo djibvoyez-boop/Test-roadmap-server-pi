@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fef6f8 0%, #f0f4f8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #fef6f8 0%, #f0f4f8 100%);
+            z-index: 3000;
+        }
+
+        .login-screen.hidden {
+            display: none;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #2d3748;
+        }
+
+        .user-select {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .user-card:hover {
+            border-color: #d97094;
+            background: #fff5f7;
+            transform: translateX(5px);
+        }
+
+        .user-avatar-login {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: linear-gradient(135deg, #d97094, #c25a7a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .user-info-login {
+            flex: 1;
+        }
+
+        .user-name-login {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2d3748;
+        }
+
+        .user-role-login {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .date-range {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 20px;
+            background: #f7fafc;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .user-profile:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: linear-gradient(135deg, #d97094, #c25a7a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .user-role {
+            font-size: 0.85em;
+            color: #718096;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #fc8181;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #f56565;
+        }
+
+        /* Daily Notes Section */
+        .daily-notes {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .notes-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .notes-date {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .notes-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: #d97094;
+        }
+
+        .notes-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .progress-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #d97094;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .garden {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(to bottom, #e8f4f8 0%, #b8dab5 100%);
+            border-radius: 10px;
+            min-height: 120px;
+            align-items: flex-end;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .garden::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to top, #8b7355 0%, transparent 100%);
+            border-radius: 0 0 10px 10px;
+        }
+
+        .flower {
+            position: relative;
+            z-index: 1;
+            animation: grow 0.5s ease-out;
+        }
+
+        @keyframes grow {
+            from {
+                transform: scale(0) translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #d97094;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c25a7a;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #7c9cbf;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #6a8aaf;
+            transform: translateY(-2px);
+        }
+
+        .btn-export {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-export:hover {
+            background: #38a169;
+        }
+
+        .btn-sync {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-sync:hover {
+            background: #5a67d8;
+        }
+
+        .reset-btn {
+            background: #fc8181;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #f56565;
+        }
+
+        .export-section {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            border-color: #d97094;
+            background: #fff5f7;
+            color: #d97094;
+        }
+
+        .timeline {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .month-section {
+            margin-bottom: 40px;
+        }
+
+        .month-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e2e8f0;
+        }
+
+        .month-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .month-progress {
+            background: #f7fafc;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #718096;
+        }
+
+        .tasks-container {
+            display: grid;
+            gap: 15px;
+        }
+
+        .task-card {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .task-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .task-card.owner {
+            border-left-color: #d97094;
+        }
+
+        .task-card.intern {
+            border-left-color: #7c9cbf;
+        }
+
+        .task-card.completed {
+            opacity: 0.7;
+            background: #e6f7ef;
+        }
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .task-checkbox:hover {
+            border-color: #d97094;
+            transform: scale(1.1);
+        }
+
+        .task-checkbox.checked {
+            background: #d97094;
+            border-color: #d97094;
+        }
+
+        .task-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .task-description {
+            color: #718096;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .task-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+
+        .badge-owner {
+            background: #fff5f7;
+            color: #d97094;
+        }
+
+        .badge-intern {
+            background: #eff6ff;
+            color: #7c9cbf;
+        }
+
+        .badge-deadline {
+            background: #fff5e6;
+            color: #d69e2e;
+        }
+
+        .badge-milestone {
+            background: #e6fffa;
+            color: #319795;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background: #7c9cbf;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #6a8aaf;
+        }
+
+        .btn-delete {
+            background: #fc8181;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #f56565;
+        }
+
+        .priority-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        .priority-high {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .priority-medium {
+            background: #fef5e7;
+            color: #d69e2e;
+        }
+
+        .priority-low {
+            background: #e6fffa;
+            color: #319795;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #718096;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #d97094;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-task-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #d97094;
+            color: white;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(217, 112, 148, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .add-task-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(217, 112, 148, 0.6);
+        }
+
+        .avatar-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: linear-gradient(135deg, #d97094, #c25a7a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            padding: 8px 16px;
+            background: #7c9cbf;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-input-label:hover {
+            background: #6a8aaf;
+        }
+
+        .sync-status {
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sync-status.success {
+            background: #e6f7ef;
+            color: #38a169;
+        }
+
+        .sync-status.error {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .sync-status.info {
+            background: #e6f7ff;
+            color: #2b6cb0;
+        }
+
+        .deadline-section {
+            background: #fff5e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .deadline-title {
+            font-weight: bold;
+            color: #d69e2e;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .deadline-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .deadline-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .progress-stats {
+                gap: 15px;
+            }
+
+            .stat-value {
+                font-size: 1.5em;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h2 class="login-title"> Bienvenue</h2>
+            <div class="user-select">
+                <div class="user-card" onclick="login('owner')">
+                    <div class="user-avatar-login" id="loginAvatarOwner">M</div>
+                    <div class="user-info-login">
+                        <div class="user-name-login" id="loginNameOwner">Moi</div>
+                        <div class="user-role-login">Project Owner</div>
+                    </div>
+                </div>
+                <div class="user-card" onclick="login('intern')">
+                    <div class="user-avatar-login" id="loginAvatarIntern" style="background: linear-gradient(135deg, #7c9cbf, #6a8aaf);">S</div>
+                    <div class="user-info-login">
+                        <div class="user-name-login" id="loginNameIntern">Stagiaire</div>
+                        <div class="user-role-login">Intern</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-secondary" style="width: 100%;" onclick="openProfileSettings()"> Gérer les profils</button>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" style="display: none;">
+        <div class="header">
+            <div class="header-left">
+                <h1>Roadmap</h1>
+                <div class="date-range">3 février - 31 juillet 2026</div>
+            </div>
+            <div class="header-right">
+                <div class="user-profile" onclick="openProfileSettings()">
+                    <div class="user-avatar" id="currentUserAvatar">M</div>
+                    <div class="user-details">
+                        <div class="user-name" id="currentUserName">Moi</div>
+                        <div class="user-role" id="currentUserRole">Project Owner</div>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">Déconnexion</button>
+            </div>
+        </div>
+
+        <!-- Daily Notes -->
+        <div class="daily-notes">
+            <div class="notes-header">
+                <div class="notes-title">Note du jour</div>
+                <div class="notes-date" id="todayDate"></div>
+            </div>
+            <textarea class="notes-textarea" id="dailyNotes" placeholder="Écrivez votre note du jour ici..."></textarea>
+            <div class="notes-actions">
+                <button class="btn btn-primary" onclick="saveDailyNote()">Sauvegarder la note</button>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-header">
+                <h2>Progression Globale</h2>
+                <div class="progress-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="totalProgress">0%</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="ownerProgress">0%</div>
+                        <div class="stat-label">Mes tâches</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="internProgress">0%</div>
+                        <div class="stat-label">Stagiaire</div>
+                    </div>
+                </div>
+            </div>
+            <div class="garden" id="garden"></div>
+        </div>
+
+        <div class="timeline">
+            <div id="syncStatus"></div>
+            
+            <div class="controls">
+                <button class="btn btn-primary" onclick="saveProgress()"> Sauvegarder</button>
+                <button class="btn btn-secondary" onclick="loadProgress()"> Charger</button>
+                <button class="btn btn-secondary" onclick="importBackup()">Importer backup</button>
+                <button class="btn reset-btn" onclick="resetProgress()">Réinitialiser</button>
+            </div>
+
+            <div class="export-section" style="margin-bottom: 20px;">
+                <button class="btn btn-export" onclick="exportToNotion()"> Export Notion</button>
+                <button class="btn btn-export" onclick="exportToCSV()">Export CSV</button>
+                <button class="btn btn-export" onclick="exportToTrello()"> Export Trello</button>
+                <button class="btn btn-sync" onclick="openNextCloudSettings()"> NextCloud Sync</button>
+            </div>
+
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="all" onclick="filterTasks('all')">Toutes</button>
+                <button class="filter-btn" data-filter="owner" onclick="filterTasks('owner')">Mes tâches</button>
+                <button class="filter-btn" data-filter="intern" onclick="filterTasks('intern')">Stagiaire</button>
+                <button class="filter-btn" data-filter="completed" onclick="filterTasks('completed')">Terminées</button>
+            </div>
+
+            <div class="deadline-section">
+                <div class="deadline-title"> Deadlines Clés</div>
+                <div class="deadline-list">
+                    <div class="deadline-item">
+                        <span>Présentation plateforme de cours</span>
+                        <strong>21 février</strong>
+                    </div>
+                    <div class="deadline-item">
+                        <span>Sélection croquis collection artisanale</span>
+                        <strong>Fin mars</strong>
+                    </div>
+                    <div class="deadline-item">
+                        <span>Premières toiles terminées</span>
+                        <strong>Fin avril</strong>
+                    </div>
+                    <div class="deadline-item">
+                        <span>Toutes les toiles + début accessoires</span>
+                        <strong>Fin mai</strong>
+                    </div>
+                    <div class="deadline-item">
+                        <span>Collection artisanale complète + shooting</span>
+                        <strong>Fin juin</strong>
+                    </div>
+                    <div class="deadline-item">
+                        <span>Collection capsule, site et plateforme finalisés</span>
+                        <strong>31 juillet</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div id="timelineContent"></div>
+        </div>
+    </div>
+
+    <!-- Add Task Button -->
+    <button class="add-task-btn" id="addTaskBtn" onclick="openAddTaskModal()" style="display: none;">+</button>
+
+    <!-- Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Ajouter une tâche</h2>
+                <button class="modal-close" onclick="closeModal('taskModal')">&times;</button>
+            </div>
+            <form id="taskForm" onsubmit="saveTask(event)">
+                <div class="form-group">
+                    <label class="form-label">Titre *</label>
+                    <input type="text" id="taskTitle" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea id="taskDescription" class="form-textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mois *</label>
+                    <select id="taskMonth" class="form-select" required>
+                        <option value="Février">Février</option>
+                        <option value="Mars">Mars</option>
+                        <option value="Avril">Avril</option>
+                        <option value="Mai">Mai</option>
+                        <option value="Juin">Juin</option>
+                        <option value="Juillet">Juillet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Assigné à *</label>
+                    <select id="taskAssignee" class="form-select" required>
+                        <option value="owner">Moi</option>
+                        <option value="intern">Stagiaire</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Deadline</label>
+                    <input type="date" id="taskDeadline" class="form-input" min="2025-02-03" max="2025-07-31">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priorité</label>
+                    <select id="taskPriority" class="form-select">
+                        <option value="">Aucune</option>
+                        <option value="high">Haute</option>
+                        <option value="medium">Moyenne</option>
+                        <option value="low">Basse</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="taskMilestone">
+                        <label for="taskMilestone">Milestone importante</label>
+                    </div>
+                </div>
+                <input type="hidden" id="taskIndex" value="">
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('taskModal')">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Settings Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">⚙️ Gestion des profils</h2>
+                <button class="modal-close" onclick="closeModal('profileModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Profil</label>
+                <select id="profileSelect" class="form-select" onchange="loadProfileForEdit()">
+                    <option value="owner">Moi (Project Owner)</option>
+                    <option value="intern">Stagiaire</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nom</label>
+                <input type="text" id="profileName" class="form-input" placeholder="Votre nom">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Photo de profil</label>
+                <div class="avatar-upload">
+                    <div class="avatar-preview" id="avatarPreview">M</div>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatarUpload(event)">
+                        <label for="avatarInput" class="file-input-label">📷 Choisir une photo</label>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="removeAvatar()">Supprimer la photo</button>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('profileModal')">Annuler</button>
+                <button type="button" class="btn btn-primary" onclick="saveProfile()"> Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NextCloud Settings Modal -->
+    <div id="nextcloudModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"> Configuration NextCloud</h2>
+                <button class="modal-close" onclick="closeModal('nextcloudModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">URL du serveur NextCloud</label>
+                <input type="text" id="nextcloudUrl" class="form-input" placeholder="https://votre-raspberry-pi.local">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nom d'utilisateur</label>
+                <input type="text" id="nextcloudUsername" class="form-input" placeholder="votre-username">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Mot de passe</label>
+                <input type="password" id="nextcloudPassword" class="form-input" placeholder="votre-mot-de-passe">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Chemin du dossier</label>
+                <input type="text" id="nextcloudPath" class="form-input" placeholder="/roadmap-backup" value="/roadmap-backup">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('nextcloudModal')">Annuler</button>
+                <button type="button" class="btn btn-primary" onclick="saveNextCloudSettings()"> Enregistrer</button>
+            </div>
+            <hr style="margin: 20px 0;">
+            <div class="form-actions" style="justify-content: center;">
+                <button type="button" class="btn btn-sync" onclick="syncToNextCloud()"> Synchroniser vers NextCloud</button>
+                <button type="button" class="btn btn-secondary" onclick="syncFromNextCloud()"> Télécharger depuis NextCloud</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Backup Input -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="handleImportFile(event)">
+
+    <script>
+        // Initial data
+        const initialTasks = [
+            // FÉVRIER
+            {
+                month: 'Février',
+                title: 'Finaliser bible de marque',
+                description: 'Charte graphique, éditoriale, codes couleurs et textiles',
+                assignee: 'owner',
+                deadline: '2025-02-28',
+                priority: 'high'
+            },
+            {
+                month: 'Février',
+                title: 'Plateforme de cours - version présentable',
+                description: 'Préparer la présentation pour le 21 février',
+                assignee: 'owner',
+                deadline: '2025-02-21',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Février',
+                title: 'Site freelance - version simple',
+                description: 'Première version du portfolio en ligne',
+                assignee: 'owner',
+                deadline: '2025-02-28',
+                priority: 'medium'
+            },
+            {
+                month: 'Février',
+                title: 'Mise à jour LinkedIn + prospection',
+                description: 'Optimiser profil et commencer la prospection',
+                assignee: 'owner',
+                priority: 'medium'
+            },
+            {
+                month: 'Février',
+                title: 'Prise en main identité visuelle',
+                description: 'Appropriation de la charte graphique et codes visuels',
+                assignee: 'intern',
+                priority: 'high'
+            },
+            {
+                month: 'Février',
+                title: 'Débuter réflexion mémoire',
+                description: 'Définir la problématique et axes de recherche',
+                assignee: 'owner',
+                priority: 'low'
+            },
+            // MARS
+            {
+                month: 'Mars',
+                title: 'Pièces d\'études modélisme',
+                description: 'Développer les premières pièces d\'étude technique',
+                assignee: 'intern',
+                priority: 'high'
+            },
+            {
+                month: 'Mars',
+                title: 'Expérimentations textiles',
+                description: 'Moulage, volumes, armatures - phase d\'exploration',
+                assignee: 'intern',
+                priority: 'high'
+            },
+            {
+                month: 'Mars',
+                title: 'Première vague de croquis',
+                description: 'Croquis pour les 9 silhouettes de la collection artisanale',
+                assignee: 'intern',
+                deadline: '2025-03-31',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Mars',
+                title: 'Planifier interviews professionnels',
+                description: 'Pour contenu de la plateforme de cours',
+                assignee: 'owner',
+                priority: 'medium'
+            },
+            {
+                month: 'Mars',
+                title: 'Organiser décor cabine',
+                description: 'Préparer le lieu pour le futur shooting',
+                assignee: 'owner',
+                priority: 'medium'
+            },
+            // AVRIL
+            {
+                month: 'Avril',
+                title: 'Sélection et hybridation croquis',
+                description: 'Choisir et combiner les meilleurs croquis',
+                assignee: 'intern',
+                priority: 'high'
+            },
+            {
+                month: 'Avril',
+                title: 'Création fiches techniques',
+                description: 'Documentation détaillée des 9 silhouettes',
+                assignee: 'intern',
+                priority: 'high'
+            },
+            {
+                month: 'Avril',
+                title: 'Réalisation premières toiles',
+                description: 'Prototypage des premières tenues',
+                assignee: 'intern',
+                deadline: '2025-04-30',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Avril',
+                title: 'Réaliser interviews professionnels',
+                description: 'Tournage et enregistrement pour la plateforme',
+                assignee: 'owner',
+                priority: 'high'
+            },
+            {
+                month: 'Avril',
+                title: 'Avancer collection capsule - design',
+                description: 'Concepts et dessins de la collection portable',
+                assignee: 'owner',
+                priority: 'medium'
+            },
+            // MAI
+            {
+                month: 'Mai',
+                title: 'Finaliser toutes les toiles',
+                description: 'Compléter le prototypage des 9 silhouettes',
+                assignee: 'intern',
+                deadline: '2025-05-31',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Mai',
+                title: 'Début accessoires porcelaine',
+                description: 'Conception et réalisation des pièces en porcelaine',
+                assignee: 'intern',
+                deadline: '2025-05-31',
+                priority: 'high'
+            },
+            {
+                month: 'Mai',
+                title: 'Finalisation textiles',
+                description: 'Broderies, motifs et finitions textiles',
+                assignee: 'intern',
+                priority: 'high'
+            },
+            {
+                month: 'Mai',
+                title: 'Collection capsule - prototypes',
+                description: 'Réalisation des premiers prototypes portables',
+                assignee: 'owner',
+                priority: 'high'
+            },
+            {
+                month: 'Mai',
+                title: 'Plateforme cours - version complète',
+                description: 'Finaliser avec contenu interviews et cours',
+                assignee: 'owner',
+                priority: 'high'
+            },
+            // JUIN
+            {
+                month: 'Juin',
+                title: 'Collection artisanale complète',
+                description: 'Finalisation des 9 silhouettes haute couture',
+                assignee: 'intern',
+                deadline: '2025-06-30',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Juin',
+                title: 'Shooting cabine',
+                description: 'Photographie professionnelle de la collection',
+                assignee: 'owner',
+                deadline: '2025-06-30',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Juin',
+                title: 'Accessoires porcelaine finalisés',
+                description: 'Compléter tous les objets en porcelaine',
+                assignee: 'intern',
+                priority: 'high'
+            },
+            {
+                month: 'Juin',
+                title: 'Livrables finaux WIP',
+                description: 'Documentation complète du work in progress',
+                assignee: 'intern',
+                priority: 'medium'
+            },
+            // JUILLET
+            {
+                month: 'Juillet',
+                title: 'Collection capsule finalisée',
+                description: 'Version finale prête à commercialiser',
+                assignee: 'owner',
+                deadline: '2025-07-31',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Juillet',
+                title: 'Site freelance complet',
+                description: 'Portfolio finalisé avec toutes les sections',
+                assignee: 'owner',
+                deadline: '2025-07-31',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Juillet',
+                title: 'Plateforme de cours finalisée',
+                description: 'Plateforme complète et opérationnelle',
+                assignee: 'owner',
+                deadline: '2025-07-31',
+                milestone: true,
+                priority: 'high'
+            },
+            {
+                month: 'Juillet',
+                title: 'Outils pour étudiants',
+                description: 'Développer et mettre en ligne les ressources pédagogiques',
+                assignee: 'owner',
+                priority: 'medium'
+            },
+            {
+                month: 'Juillet',
+                title: 'Avancement mémoire',
+                description: 'Rédaction substantielle et recherche approfondie',
+                assignee: 'owner',
+                priority: 'medium'
+            }
+        ];
+
+        let tasks = [...initialTasks];
+        let completedTasks = new Set();
+        let taskStatuses = {};
+        let currentFilter = 'all';
+        let currentUser = null;
+
+        // User profiles
+        let profiles = {
+            owner: {
+                name: 'Moi',
+                role: 'Project Owner',
+                avatar: null,
+                initial: 'M'
+            },
+            intern: {
+                name: 'Stagiaire',
+                role: 'Intern',
+                avatar: null,
+                initial: 'S'
+            }
+        };
+
+        // NextCloud settings
+        let nextcloudConfig = {
+            url: '',
+            username: '',
+            password: '',
+            path: '/roadmap-backup'
+        };
+
+        // Pixel art flowers
+        const flowerTypes = [
+            `<svg width="40" height="60" viewBox="0 0 40 60">
+                <rect x="18" y="30" width="4" height="30" fill="#5a8a3a"/>
+                <rect x="14" y="16" width="4" height="4" fill="#ff69b4"/>
+                <rect x="22" y="16" width="4" height="4" fill="#ff69b4"/>
+                <rect x="18" y="12" width="4" height="4" fill="#ff69b4"/>
+                <rect x="18" y="20" width="4" height="4" fill="#ff69b4"/>
+                <rect x="18" y="16" width="4" height="4" fill="#ffeb3b"/>
+            </svg>`,
+            `<svg width="40" height="60" viewBox="0 0 40 60">
+                <rect x="18" y="25" width="4" height="35" fill="#5a8a3a"/>
+                <rect x="14" y="14" width="4" height="4" fill="#4a9eff"/>
+                <rect x="22" y="14" width="4" height="4" fill="#4a9eff"/>
+                <rect x="18" y="10" width="4" height="4" fill="#4a9eff"/>
+                <rect x="18" y="18" width="4" height="4" fill="#4a9eff"/>
+                <rect x="18" y="14" width="4" height="4" fill="#fff"/>
+            </svg>`,
+            `<svg width="40" height="60" viewBox="0 0 40 60">
+                <rect x="18" y="28" width="4" height="32" fill="#5a8a3a"/>
+                <rect x="14" y="18" width="4" height="4" fill="#b19cd9"/>
+                <rect x="22" y="18" width="4" height="4" fill="#b19cd9"/>
+                <rect x="18" y="14" width="4" height="4" fill="#b19cd9"/>
+                <rect x="18" y="22" width="4" height="4" fill="#b19cd9"/>
+                <rect x="10" y="18" width="4" height="4" fill="#b19cd9"/>
+                <rect x="26" y="18" width="4" height="4" fill="#b19cd9"/>
+                <rect x="18" y="18" width="4" height="4" fill="#ffe54c"/>
+            </svg>`
+        ];
+
+        // Initialize
+        function init() {
+            loadProfiles();
+            loadNextCloudConfig();
+            loadAutoSave();
+            updateTodayDate();
+            loadDailyNote();
+        }
+
+        function updateTodayDate() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('todayDate').textContent = today.toLocaleDateString('fr-FR', options);
+        }
+
+        // Login/Logout
+        function login(userType) {
+            currentUser = userType;
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('addTaskBtn').style.display = 'block';
+            updateUserDisplay();
+            renderTimeline();
+            updateProgress();
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('addTaskBtn').style.display = 'none';
+        }
+
+        function updateUserDisplay() {
+            const profile = profiles[currentUser];
+            const avatar = document.getElementById('currentUserAvatar');
+            const name = document.getElementById('currentUserName');
+            const role = document.getElementById('currentUserRole');
+
+            if (profile.avatar) {
+                avatar.innerHTML = `<img src="${profile.avatar}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                avatar.textContent = profile.initial;
+            }
+
+            name.textContent = profile.name;
+            role.textContent = profile.role;
+        }
+
+        // Profile Management
+        function loadProfiles() {
+            const saved = localStorage.getItem('userProfiles');
+            if (saved) {
+                profiles = JSON.parse(saved);
+                updateLoginScreen();
+            }
+        }
+
+        function saveProfiles() {
+            localStorage.setItem('userProfiles', JSON.stringify(profiles));
+            updateLoginScreen();
+        }
+
+        function updateLoginScreen() {
+            // Update owner
+            const ownerProfile = profiles.owner;
+            document.getElementById('loginNameOwner').textContent = ownerProfile.name;
+            const ownerAvatar = document.getElementById('loginAvatarOwner');
+            if (ownerProfile.avatar) {
+                ownerAvatar.innerHTML = `<img src="${ownerProfile.avatar}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                ownerAvatar.textContent = ownerProfile.initial;
+            }
+
+            // Update intern
+            const internProfile = profiles.intern;
+            document.getElementById('loginNameIntern').textContent = internProfile.name;
+            const internAvatar = document.getElementById('loginAvatarIntern');
+            if (internProfile.avatar) {
+                internAvatar.innerHTML = `<img src="${internProfile.avatar}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                internAvatar.textContent = internProfile.initial;
+            }
+        }
+
+        function openProfileSettings() {
+            document.getElementById('profileModal').classList.add('active');
+            loadProfileForEdit();
+        }
+
+        function loadProfileForEdit() {
+            const selectedProfile = document.getElementById('profileSelect').value;
+            const profile = profiles[selectedProfile];
+            
+            document.getElementById('profileName').value = profile.name;
+            
+            const preview = document.getElementById('avatarPreview');
+            if (profile.avatar) {
+                preview.innerHTML = `<img src="${profile.avatar}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                preview.textContent = profile.initial;
+                preview.style.background = selectedProfile === 'owner' ? 
+                    'linear-gradient(135deg, #d97094, #c25a7a)' : 
+                    'linear-gradient(135deg, #7c9cbf, #6a8aaf)';
+            }
+        }
+
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('avatarPreview');
+                    preview.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+                    preview.dataset.avatar = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeAvatar() {
+            const selectedProfile = document.getElementById('profileSelect').value;
+            const profile = profiles[selectedProfile];
+            const preview = document.getElementById('avatarPreview');
+            preview.innerHTML = '';
+            preview.textContent = profile.initial;
+            preview.style.background = selectedProfile === 'owner' ? 
+                'linear-gradient(135deg, #d97094, #c25a7a)' : 
+                'linear-gradient(135deg, #7c9cbf, #6a8aaf)';
+            delete preview.dataset.avatar;
+        }
+
+        function saveProfile() {
+            const selectedProfile = document.getElementById('profileSelect').value;
+            const name = document.getElementById('profileName').value;
+            const preview = document.getElementById('avatarPreview');
+            
+            profiles[selectedProfile].name = name || profiles[selectedProfile].name;
+            
+            if (preview.dataset.avatar) {
+                profiles[selectedProfile].avatar = preview.dataset.avatar;
+            } else if (!preview.querySelector('img')) {
+                profiles[selectedProfile].avatar = null;
+            }
+
+            saveProfiles();
+            
+            if (currentUser) {
+                updateUserDisplay();
+            }
+            
+            closeModal('profileModal');
+            alert(' Profil enregistré !');
+        }
+
+        // Daily Notes
+        function loadDailyNote() {
+            const today = new Date().toISOString().split('T')[0];
+            const saved = localStorage.getItem(`dailyNote_${today}`);
+            if (saved) {
+                document.getElementById('dailyNotes').value = saved;
+            }
+        }
+
+        function saveDailyNote() {
+            const today = new Date().toISOString().split('T')[0];
+            const note = document.getElementById('dailyNotes').value;
+            localStorage.setItem(`dailyNote_${today}`, note);
+            alert(' Note du jour sauvegardée !');
+        }
+
+        // Timeline rendering
+        function renderTimeline() {
+            const months = ['Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'];
+            const content = document.getElementById('timelineContent');
+            content.innerHTML = '';
+
+            months.forEach(month => {
+                const monthTasks = tasks.filter(t => t.month === month);
+                
+                let filteredTasks = monthTasks;
+                if (currentFilter === 'owner') {
+                    filteredTasks = monthTasks.filter(t => t.assignee === 'owner');
+                } else if (currentFilter === 'intern') {
+                    filteredTasks = monthTasks.filter(t => t.assignee === 'intern');
+                } else if (currentFilter === 'completed') {
+                    filteredTasks = monthTasks.filter(t => completedTasks.has(tasks.indexOf(t)));
+                }
+
+                if (filteredTasks.length === 0 && currentFilter !== 'all') return;
+
+                const monthSection = document.createElement('div');
+                monthSection.className = 'month-section';
+
+                const completed = monthTasks.filter(t => completedTasks.has(tasks.indexOf(t))).length;
+                const progress = Math.round((completed / monthTasks.length) * 100);
+
+                monthSection.innerHTML = `
+                    <div class="month-header">
+                        <div class="month-name">${month}</div>
+                        <div class="month-progress">${completed}/${monthTasks.length} tâches • ${progress}%</div>
+                    </div>
+                    <div class="tasks-container" id="tasks-${month}"></div>
+                `;
+
+                content.appendChild(monthSection);
+
+                const tasksContainer = document.getElementById(`tasks-${month}`);
+                filteredTasks.forEach((task) => {
+                    const taskIndex = tasks.indexOf(task);
+                    const isCompleted = completedTasks.has(taskIndex);
+                    
+                    const taskCard = document.createElement('div');
+                    taskCard.className = `task-card ${task.assignee} ${isCompleted ? 'completed' : ''}`;
+                    
+                    const profile = profiles[task.assignee];
+                    const avatarClass = task.assignee === 'owner' ? 'avatar-owner' : 'avatar-intern';
+                    let avatarContent;
+                    if (profile.avatar) {
+                        avatarContent = `<img src="${profile.avatar}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+                    } else {
+                        avatarContent = profile.initial;
+                    }
+                    
+                    const badgeClass = task.assignee === 'owner' ? 'badge-owner' : 'badge-intern';
+                    const badgeText = profile.name;
+                    
+                    let priorityBadge = '';
+                    if (task.priority) {
+                        const priorityLabels = { high: 'Haute', medium: 'Moyenne', low: 'Basse' };
+                        priorityBadge = `<span class="priority-badge priority-${task.priority}"> ${priorityLabels[task.priority]}</span>`;
+                    }
+                    
+                    taskCard.innerHTML = `
+                        <div class="task-header">
+                            <div class="task-checkbox ${isCompleted ? 'checked' : ''}" onclick="toggleTask(${taskIndex})"></div>
+                            <div class="avatar ${avatarClass}">${avatarContent}</div>
+                            <div class="task-content">
+                                <div class="task-title">${task.title}</div>
+                                <div class="task-description">${task.description}</div>
+                                <div class="task-meta">
+                                    <span class="task-badge ${badgeClass}">${badgeText}</span>
+                                    ${task.deadline ? `<span class="task-badge badge-deadline"> ${formatDate(task.deadline)}</span>` : ''}
+                                    ${task.milestone ? `<span class="task-badge badge-milestone"> Milestone</span>` : ''}
+                                    ${priorityBadge}
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="action-btn btn-edit" onclick="editTask(${taskIndex})" title="Modifier">✏️</button>
+                                <button class="action-btn btn-delete" onclick="deleteTask(${taskIndex})" title="Supprimer">🗑️</button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    tasksContainer.appendChild(taskCard);
+                });
+            });
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const options = { day: 'numeric', month: 'long' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+
+        function toggleTask(index) {
+            if (completedTasks.has(index)) {
+                completedTasks.delete(index);
+            } else {
+                completedTasks.add(index);
+                addFlower();
+            }
+            updateProgress();
+            renderTimeline();
+            autoSave();
+        }
+
+        function addFlower() {
+            const garden = document.getElementById('garden');
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            const randomFlower = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+            flower.innerHTML = randomFlower;
+            garden.appendChild(flower);
+        }
+
+        function updateProgress() {
+            const total = tasks.length;
+            const completed = completedTasks.size;
+            const ownerTasks = tasks.filter(t => t.assignee === 'owner').length;
+            const ownerCompleted = tasks.filter((t, i) => t.assignee === 'owner' && completedTasks.has(i)).length;
+            const internTasks = tasks.filter(t => t.assignee === 'intern').length;
+            const internCompleted = tasks.filter((t, i) => t.assignee === 'intern' && completedTasks.has(i)).length;
+
+            document.getElementById('totalProgress').textContent = Math.round((completed / total) * 100) + '%';
+            document.getElementById('ownerProgress').textContent = Math.round((ownerCompleted / ownerTasks) * 100) + '%';
+            document.getElementById('internProgress').textContent = Math.round((internCompleted / internTasks) * 100) + '%';
+        }
+
+        function filterTasks(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+            renderTimeline();
+        }
+
+        // Task management
+        function openAddTaskModal() {
+            document.getElementById('modalTitle').textContent = 'Ajouter une tâche';
+            document.getElementById('taskForm').reset();
+            document.getElementById('taskIndex').value = '';
+            document.getElementById('taskModal').classList.add('active');
+        }
+
+        function editTask(index) {
+            const task = tasks[index];
+            document.getElementById('modalTitle').textContent = 'Modifier la tâche';
+            document.getElementById('taskTitle').value = task.title;
+            document.getElementById('taskDescription').value = task.description || '';
+            document.getElementById('taskMonth').value = task.month;
+            document.getElementById('taskAssignee').value = task.assignee;
+            document.getElementById('taskDeadline').value = task.deadline || '';
+            document.getElementById('taskPriority').value = task.priority || '';
+            document.getElementById('taskMilestone').checked = task.milestone || false;
+            document.getElementById('taskIndex').value = index;
+            document.getElementById('taskModal').classList.add('active');
+        }
+
+        function saveTask(event) {
+            event.preventDefault();
+            
+            const taskData = {
+                month: document.getElementById('taskMonth').value,
+                title: document.getElementById('taskTitle').value,
+                description: document.getElementById('taskDescription').value,
+                assignee: document.getElementById('taskAssignee').value,
+                deadline: document.getElementById('taskDeadline').value || undefined,
+                priority: document.getElementById('taskPriority').value || undefined,
+                milestone: document.getElementById('taskMilestone').checked
+            };
+            
+            const index = document.getElementById('taskIndex').value;
+            
+            if (index === '') {
+                tasks.push(taskData);
+            } else {
+                tasks[parseInt(index)] = taskData;
+            }
+            
+            closeModal('taskModal');
+            renderTimeline();
+            autoSave();
+        }
+
+        function deleteTask(index) {
+            if (confirm('Êtes-vous sûr(e) de vouloir supprimer cette tâche ?')) {
+                tasks.splice(index, 1);
+                
+                const newCompleted = new Set();
+                const newStatuses = {};
+                
+                completedTasks.forEach(i => {
+                    if (i < index) newCompleted.add(i);
+                    else if (i > index) newCompleted.add(i - 1);
+                });
+                
+                Object.keys(taskStatuses).forEach(i => {
+                    const idx = parseInt(i);
+                    if (idx < index) newStatuses[idx] = taskStatuses[i];
+                    else if (idx > index) newStatuses[idx - 1] = taskStatuses[i];
+                });
+                
+                completedTasks = newCompleted;
+                taskStatuses = newStatuses;
+                
+                const garden = document.getElementById('garden');
+                garden.innerHTML = '';
+                for (let i = 0; i < completedTasks.size; i++) {
+                    addFlower();
+                }
+                
+                renderTimeline();
+                updateProgress();
+                autoSave();
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Save/Load functions
+        function autoSave() {
+            saveProgress();
+        }
+
+        function saveProgress() {
+            const data = {
+                completedTasks: Array.from(completedTasks),
+                taskStatuses: taskStatuses,
+                customTasks: tasks,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('roadmapProgress', JSON.stringify(data));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('roadmapProgress');
+            if (saved) {
+                const data = JSON.parse(saved);
+                completedTasks = new Set(data.completedTasks || []);
+                taskStatuses = data.taskStatuses || {};
+                
+                if (data.customTasks && data.customTasks.length > 0) {
+                    tasks = [...data.customTasks];
+                }
+                
+                const garden = document.getElementById('garden');
+                garden.innerHTML = '';
+                for (let i = 0; i < completedTasks.size; i++) {
+                    addFlower();
+                }
+                
+                updateProgress();
+                renderTimeline();
+                alert(' Progression chargée !');
+            } else {
+                alert(' Aucune sauvegarde trouvée.');
+            }
+        }
+
+        function loadAutoSave() {
+            const saved = localStorage.getItem('roadmapProgress');
+            if (saved) {
+                const data = JSON.parse(saved);
+                completedTasks = new Set(data.completedTasks || []);
+                taskStatuses = data.taskStatuses || {};
+                
+                if (data.customTasks && data.customTasks.length > 0) {
+                    tasks = [...data.customTasks];
+                }
+                
+                const garden = document.getElementById('garden');
+                for (let i = 0; i < completedTasks.size; i++) {
+                    addFlower();
+                }
+            }
+        }
+
+        function resetProgress() {
+            if (confirm('Êtes-vous sûr(e) de vouloir réinitialiser toute la progression ?')) {
+                completedTasks.clear();
+                taskStatuses = {};
+                tasks = [...initialTasks];
+                document.getElementById('garden').innerHTML = '';
+                updateProgress();
+                renderTimeline();
+                localStorage.removeItem('roadmapProgress');
+                alert(' Progression réinitialisée !');
+            }
+        }
+
+        // Import/Export
+        function importBackup() {
+            document.getElementById('importFileInput').click();
+        }
+
+        function handleImportFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        
+                        if (data.completedTasks) {
+                            completedTasks = new Set(data.completedTasks);
+                        }
+                        if (data.taskStatuses) {
+                            taskStatuses = data.taskStatuses;
+                        }
+                        if (data.customTasks) {
+                            tasks = [...data.customTasks];
+                        }
+                        
+                        const garden = document.getElementById('garden');
+                        garden.innerHTML = '';
+                        for (let i = 0; i < completedTasks.size; i++) {
+                            addFlower();
+                        }
+                        
+                        updateProgress();
+                        renderTimeline();
+                        saveProgress();
+                        
+                        alert(' Backup importé avec succès !');
+                    } catch (error) {
+                        alert(' Erreur lors de l\'import du fichier. Vérifiez le format.');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function exportToNotion() {
+            const notionData = {
+                database_title: "Roadmap Projet Créatif 2025",
+                pages: tasks.map((task, index) => ({
+                    properties: {
+                        Title: { title: [{ text: { content: task.title } }] },
+                        Description: { rich_text: [{ text: { content: task.description || '' } }] },
+                        Month: { select: { name: task.month } },
+                        Assignee: { select: { name: profiles[task.assignee].name } },
+                        Status: { 
+                            select: { 
+                                name: completedTasks.has(index) ? 'Terminé' : 
+                                      taskStatuses[index] === 'in-progress' ? 'En cours' : 
+                                      'À faire' 
+                            } 
+                        },
+                        Deadline: task.deadline ? { date: { start: task.deadline } } : null,
+                        Priority: task.priority ? { select: { name: task.priority } } : null,
+                        Milestone: { checkbox: task.milestone || false }
+                    }
+                }))
+            };
+            
+            downloadJSON(notionData, 'roadmap-notion-export.json');
+            alert(' Export Notion créé !');
+        }
+
+        function exportToTrello() {
+            const trelloData = {
+                name: "Roadmap Projet Créatif 2025",
+                lists: ['Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'].map(month => ({
+                    name: month,
+                    cards: tasks
+                        .filter(task => task.month === month)
+                        .map((task) => {
+                            const taskIndex = tasks.indexOf(task);
+                            return {
+                                name: task.title,
+                                desc: task.description || '',
+                                due: task.deadline || null,
+                                labels: [
+                                    { name: profiles[task.assignee].name },
+                                    task.priority ? { name: task.priority } : null,
+                                    task.milestone ? { name: 'Milestone' } : null
+                                ].filter(Boolean),
+                                closed: completedTasks.has(taskIndex)
+                            };
+                        })
+                }))
+            };
+            
+            downloadJSON(trelloData, 'roadmap-trello-export.json');
+            alert('Export Trello créé !');
+        }
+
+        function exportToCSV() {
+            const headers = ['Mois', 'Titre', 'Description', 'Assigné', 'Deadline', 'Priorité', 'Milestone', 'Statut'];
+            const rows = tasks.map((task, index) => [
+                task.month,
+                `"${task.title}"`,
+                `"${task.description || ''}"`,
+                profiles[task.assignee].name,
+                task.deadline || '',
+                task.priority || '',
+                task.milestone ? 'Oui' : 'Non',
+                completedTasks.has(index) ? 'Terminé' : 
+                    taskStatuses[index] === 'in-progress' ? 'En cours' : 'À faire'
+            ]);
+            
+            const csv = [headers, ...rows].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'roadmap-export.csv';
+            link.click();
+            
+            alert(' Export CSV téléchargé !');
+        }
+
+        function downloadJSON(data, filename) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+
+        // NextCloud sync
+        function loadNextCloudConfig() {
+            const saved = localStorage.getItem('nextcloudConfig');
+            if (saved) {
+                nextcloudConfig = JSON.parse(saved);
+            }
+        }
+
+        function saveNextCloudSettings() {
+            nextcloudConfig.url = document.getElementById('nextcloudUrl').value;
+            nextcloudConfig.username = document.getElementById('nextcloudUsername').value;
+            nextcloudConfig.password = document.getElementById('nextcloudPassword').value;
+            nextcloudConfig.path = document.getElementById('nextcloudPath').value;
+            
+            localStorage.setItem('nextcloudConfig', JSON.stringify(nextcloudConfig));
+            alert(' Configuration NextCloud sauvegardée !');
+            closeModal('nextcloudModal');
+        }
+
+        function openNextCloudSettings() {
+            document.getElementById('nextcloudUrl').value = nextcloudConfig.url || '';
+            document.getElementById('nextcloudUsername').value = nextcloudConfig.username || '';
+            document.getElementById('nextcloudPassword').value = nextcloudConfig.password || '';
+            document.getElementById('nextcloudPath').value = nextcloudConfig.path || '/roadmap-backup';
+            document.getElementById('nextcloudModal').classList.add('active');
+        }
+
+        function syncToNextCloud() {
+            if (!nextcloudConfig.url || !nextcloudConfig.username || !nextcloudConfig.password) {
+                alert(' Veuillez d\'abord configurer les paramètres NextCloud.');
+                return;
+            }
+
+            showSyncStatus('info', ' Synchronisation en cours...');
+
+            const data = {
+                completedTasks: Array.from(completedTasks),
+                taskStatuses: taskStatuses,
+                customTasks: tasks,
+                profiles: profiles,
+                timestamp: new Date().toISOString()
+            };
+
+            // Simulated NextCloud sync (in reality, you would use WebDAV API)
+            // This is a placeholder - actual implementation would require CORS-enabled NextCloud
+            setTimeout(() => {
+                const jsonData = JSON.stringify(data, null, 2);
+                const blob = new Blob([jsonData], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `roadmap-backup-${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                
+                showSyncStatus('success', ' Backup créé ! Uploadez ce fichier manuellement vers NextCloud.');
+                
+                // Note: For real NextCloud sync, you would use:
+                // const webdavUrl = `${nextcloudConfig.url}/remote.php/dav/files/${nextcloudConfig.username}${nextcloudConfig.path}/roadmap-backup.json`;
+                // Then use fetch with Basic Auth to PUT the file
+            }, 1000);
+        }
+
+        function syncFromNextCloud() {
+            if (!nextcloudConfig.url || !nextcloudConfig.username || !nextcloudConfig.password) {
+                alert(' Veuillez d\'abord configurer les paramètres NextCloud.');
+                return;
+            }
+
+            showSyncStatus('info', ' Téléchargement en cours...');
+            
+            // Simulated - real implementation would use WebDAV GET request
+            alert(' Pour télécharger depuis NextCloud, utilisez le bouton " Importer backup" et sélectionnez votre fichier depuis NextCloud.');
+            clearSyncStatus();
+        }
+
+        function showSyncStatus(type, message) {
+            const statusDiv = document.getElementById('syncStatus');
+            statusDiv.className = `sync-status ${type}`;
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'flex';
+        }
+
+        function clearSyncStatus() {
+            setTimeout(() => {
+                document.getElementById('syncStatus').style.display = 'none';
+            }, 3000);
+        }
+
+        // Close modals on outside click
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Initialize app
+        init();
+    </script>
+</body>
+</html>
